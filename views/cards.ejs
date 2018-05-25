@@ -1,0 +1,21 @@
+<% include partials/home-header %>
+
+<div class="container">
+
+  <div class="row">
+    <% card.forEach(function(card){%>
+    <div class="col-sm-6 col-md-4 cart_global">
+      <div class="card" style="width: 18rem;">
+        <img class="card-img-top" src="<%= card.image %>" alt="Card image cap">
+        <div class="card-body">
+          <h5 class="card-title"><%=card.titre%></h5>
+          <p class="card-text"><%=card.desc%></p>
+          <a href="<%=card.coursLien%>" class="btn btn-primary">Voir la formation</a>
+        </div>
+      </div>
+    </div>
+<%});%>
+</div>
+</div>
+
+<% include partials/footer %>

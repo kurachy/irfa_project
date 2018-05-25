@@ -1,0 +1,78 @@
+* html #footer {
+  position:absolute;
+  top:expression((0-(footer.offsetHeight)+(document.documentElement.clientHeight ? document.documentElement.clientHeight : document.body.clientHeight)+(ignoreMe = document.documentElement.scrollTop ? document.documentElement.scrollTop : document.body.scrollTop))+'px');
+}
+
+h1{
+  color:green;
+}
+body{
+  font-family: 'Ubuntu', sans-serif;
+}
+
+
+#logo{
+
+  width: 47%;
+}
+
+.login{
+  display: inline-block;
+}
+.backImg{
+  background-image: url("../img/studying2.jpg");
+  height: 561px;
+  background-size: cover;
+  background-repeat: no-repeat;
+  text-align: center;
+}
+#HomeText{
+  padding-top: 148px;
+  text-align: center;
+  color: rgb(255, 255, 255);
+  font-size: 40px;
+  font-weight: bold;
+
+}
+
+#subHomeText{
+  font-size: 20px;
+}
+.homeBtn{
+
+}
+
+.cart_global{
+  padding: 20px;
+}
+
+.footer {
+
+  left:0px;
+  bottom:0px;
+  height: 90px;
+  width:100%;
+  background-color: rgb(0, 145, 149) ;
+}
+
+#footer_title{
+
+  margin-bottom: 0;
+  text-align: center;
+  color: rgb(255, 255, 255);
+}
+
+.sociaux_logos{
+  display: inline-block;
+  font-size:42px;
+  padding-left: 40%;
+  /* padding-right: 40%; */
+
+
+}
+
+.sociaux_logo{
+  /* margin: 2%; */
+  /* margin: auto; */
+    margin-right: 34px;
+}
