@@ -1,32 +1,36 @@
-
+<% include partials/header %>
 <div class="container">
   <div class="row">
+    <div class="newCardGlobal">
 
-    <h1 style="text-align: center;">Cree une nouvelle carte</h1>
-    <div style="width:30%; margin: 25px auto;">
+
+      <h1>Cree une nouvelle carte</h1>
+
 
       <form action="/" method="POST">
         <div class="form-group">
-          <input class="form-control" type="text" name="image" placeholder="image url">
+          <input class="form-control" type="text" name="image" required placeholder="image url">
         </div>
 
         <div class="form-group">
-          <input class="form-control" type="text" name="titre" placeholder="titre">
+          <input class="form-control" type="text" name="titre" required placeholder="titre">
         </div>
         <div class="form-group">
-          <input class="form-control" type="text" name="desc" placeholder="description">
+          <input class="form-control" type="text" name="desc" required placeholder="description">
         </div>
         <div class="form-group">
-          <input class="form-control" type="text" name="coursLien" placeholder="url du cours">
+          <input class="form-control" type="text" name="coursLien" requireds placeholder="url du cours">
         </div>
         <div class="form-group">
           <button class="btn btn-lg btn-block btn-primary ">Envoyer!</button>
         </div>
 
-    </form>
-    <a href="/">Retour</a>
+      </form>
+      <a href="/">Retour</a>
+    </div>
   </div>
-  </div>
+</div>
 
-</div>
-</div>
+
+
+<% include partials/footer %>

@@ -1,13 +1,13 @@
-* html #footer {
-  position:absolute;
-  top:expression((0-(footer.offsetHeight)+(document.documentElement.clientHeight ? document.documentElement.clientHeight : document.body.clientHeight)+(ignoreMe = document.documentElement.scrollTop ? document.documentElement.scrollTop : document.body.scrollTop))+'px');
+.footer {
+  position:relative;
+  margin-bottom: 0;
+
 }
 
-h1{
-  color:green;
-}
+
 body{
   font-family: 'Ubuntu', sans-serif;
+  min-height: calc(100vh - 70px);
 }
 
 
@@ -63,16 +63,23 @@ body{
 }
 
 .sociaux_logos{
-  display: inline-block;
+  text-align: center;
+  margin: auto;
   font-size:42px;
-  padding-left: 40%;
-  /* padding-right: 40%; */
+
+
 
 
 }
 
 .sociaux_logo{
-  /* margin: 2%; */
-  /* margin: auto; */
-    margin-right: 34px;
+  text-align: center;
+  padding: 10px;
+}
+
+.newCardGlobal{
+  padding-top: 40px;
+  min-height: 800px;
+  position: inherit;
+  margin: auto;
 }
