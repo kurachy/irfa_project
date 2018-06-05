@@ -12,7 +12,7 @@ app.use(express.static("public"));
 app.set("view engine", "ejs");
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(require("express-session")({
-  secret: "",
+  secret: "Steel for Men, Silver for Monster and Gold for The Witcher",
   resave: false,
   saveUninitialized: false
 }));
@@ -24,6 +24,10 @@ passport.use(new LocalStrategy(User.authenticate()));
 passport.serializeUser(User.serializeUser());
 passport.deserializeUser(User.deserializeUser());
 
+app.use(function(req, res, next){
+  res.locals.currentUser = req.user;
+  next();
+});
 
 var irfaSchema = new mongoose.Schema({
   image: String,
@@ -77,7 +81,7 @@ app.post("/register", function(req, res){
       return res.render('register');
     }
     passport.authenticate("local")(req, res, function(){
-      res.redirect("/secret");
+      res.redirect("/");
     });
   });
 });
@@ -97,7 +101,7 @@ app.get("/login", function(req, res){
 
 
 app.post("/login", passport.authenticate("local", {
-  successRedirect: "/secret",
+  successRedirect: "/",
   failureRedirect: "/login"
 }) ,function(req, res){
 
