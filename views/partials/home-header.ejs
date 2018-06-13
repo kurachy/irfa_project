@@ -30,7 +30,6 @@
               <a class="nav-link" href="/secret">Mes Cours</a>
             </li>
             <%  } %>
-
           </ul>
           <span class="navbar-text">
             <!-- <ul class="nav navbar-nav navbar-right" > -->
@@ -40,12 +39,13 @@
                 <li><a href="/login"><span class="glyphicon glyphicon-log-in nav-item login"><i class="fas fa-user"></i></span> Login</a></li>
                 <%  } else { %>
                   <li> <a href="#">Bonjour <%= currentUser.username%>!</a> </li>
-                  <li> <a href="/logout">Logout</a> <i class="fas fa-sign-out-alt"></i></li>
+                  <li> <a href="/logout">Logout</a> </li>
                   <%  } %>
                 </ul>
               </span>
             </div>
           </nav>
+
 
 
           <div class="backImg">

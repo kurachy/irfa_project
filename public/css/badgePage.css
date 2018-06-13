@@ -87,3 +87,11 @@ ul {
   position: inherit;
   margin: auto;
 }
+.centershow{
+  padding: 20px;
+  margin:auto;
+  text-align: center;
+  max-width: 500px;
+  word-wrap: break-word;
+  min-height: 800px;
+}

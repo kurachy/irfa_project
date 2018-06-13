@@ -1,0 +1,23 @@
+<% include partials/header %>
+<div class="container">
+  <div class="row">
+    <div class="centershow">
+
+
+      <h1><%=card.titre%></h1>
+      <img src="<%=card.image%>">
+      <p><%=card.desc%></p>
+
+<form action="/<%=card._id%>?_method=DELETE" method="POST">
+  <button class="btn btn-ls btn-block btn-primary ">Delete</button>
+</form>
+
+
+      <a href="/">Retour</a>
+    </div>
+  </div>
+</div>
+
+
+
+<% include partials/footer %>

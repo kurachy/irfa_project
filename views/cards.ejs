@@ -9,8 +9,8 @@
         <img class="card-img-top" src="<%= card.image %>" alt="Card image cap">
         <div class="card-body">
           <h5 class="card-title"><%=card.titre%></h5>
-          <p class="card-text"><%=card.desc%></p>
-          <a href="<%=card.coursLien%>" class="btn btn-primary">Voir la formation</a>
+          <p class="card-text"><%-card.desc.substring(0,100)%></p>
+          <a href="<%=card._id%>" class="btn btn-primary">Voir la formation</a>
         </div>
       </div>
     </div>

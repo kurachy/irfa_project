@@ -4,19 +4,24 @@ bodyParser = require("body-parser"),
 passport = require("passport"),
 User = require("./models/user.js"),
 LocalStrategy = require("passport-local"),
+expressSanitizer = require("express-sanitizer"),
 passportLocalMongoose = require("passport-local-mongoose"),
-mongoose = require("mongoose")
+Card = require("./models/card.js"),
+mongoose = require("mongoose"),
+methodOverride = require("method-override");
+
 
 mongoose.connect("mongodb://localhost/irfa");
 app.use(express.static("public"));
 app.set("view engine", "ejs");
+
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(require("express-session")({
-  secret: "Steel for Men, Silver for Monster and Gold for The Witcher",
+  secret: "",
   resave: false,
   saveUninitialized: false
 }));
-
+app.use(expressSanitizer());
 app.use(passport.initialize());
 app.use(passport.session());
 
@@ -28,36 +33,27 @@ app.use(function(req, res, next){
   res.locals.currentUser = req.user;
   next();
 });
+app.use(methodOverride("_method"));
 
-var irfaSchema = new mongoose.Schema({
-  image: String,
-  desc : String,
-  titre : String,
-  coursLien : String
-});
+// var cardSchema = new mongoose.Schema({
+//   image: String,
+//   desc : String,
+//   titre : String,
+//   coursLien : String
+// });
+//
+// var Card = mongoose.model("card", cardSchema);
 
-var Irfa = mongoose.model("card", irfaSchema);
 
 
-app.get("/", function(req, res){
-  Irfa.find({}, function(err, allCards){
-    if(err){
-      console.log(err);
-    }else{
-      res.render("cards",{card:allCards});
-    }
-
-  });
-
-});
 
 app.post("/", function(req, res){
   var image = req.body.image;
   var desc = req.body.desc;
   var titre = req.body.titre;
-  var coursLien = req.body.coursLien;
-  var newCard = {image: image, desc: desc, titre: titre, coursLien: coursLien}
-  Irfa.create(newCard, function(err, newlyCreated){
+  // var coursLien = req.body.coursLien;
+  var newCard = {image: image, desc: desc, titre: titre}
+  Card.create(newCard, function(err, newlyCreated){
     if(err){
       console.log(err);
     }else{
@@ -67,7 +63,7 @@ app.post("/", function(req, res){
 });
 
 app.get("/secret",isLoggedIn, function(req, res){
-   res.render("secret");
+  res.render("secret");
 });
 
 app.get("/register", function(req, res){
@@ -92,6 +88,7 @@ app.get("/new", function(req, res){
   res.render("new.ejs");
 });
 
+
 app.get("/login", function(req, res){
   res.render("login");
 });
@@ -110,6 +107,75 @@ app.post("/login", passport.authenticate("local", {
 app.get("/logout", function(req, res){
   req.logout();
   res.redirect("/");
+});
+
+app.get("/", function(req, res){
+  Card.find({}, function(err, allCards){
+    if(err){
+      console.log(err);
+    }else{
+      res.render("cards",{card:allCards});
+    }
+
+  });
+
+});
+
+app.get("/:id",function(req, res){
+  Card.findById(req.params.id, function(err, card){
+    if(err){
+      res.redirect("/");
+    }else {
+      res.render("show", {card: card});
+    }
+  })
+});
+
+app.get("/:id/edit", function(req, res){
+  Card.findById(req.params.id, function(err, card){
+    if(err){
+      res.redirect("/");
+    } else {
+      res.render("edit", {card:  card});
+    }
+  });
+
+})
+
+
+
+// app.put("/:id", function(req, res){
+//    Card.findByIdAndUpdate(req.params.card_id, req.body.card, function(err, card){
+//        if(err){
+//            console.log(err);
+//        } else {
+//          var showUrl = "/" + card._id;
+//          res.redirect(showUrl);
+//        }
+//    });
+// });
+
+app.put("/:id", function(req,res)  {
+
+
+    Card.findByIdAndUpdate(req.params.card_id,{$set:req.body.card}, function(err, card){
+        if(err){
+            console.log(err);
+        }
+        var showUrl = "/" + card._id;
+        res.redirect(showUrl);
+    });
+});
+
+app.delete("/:id", function(req, res){
+   Card.findById(req.params.id, function(err, card){
+       if(err){
+           console.log(err);
+       } else {
+           card.remove();
+           res.redirect("/");
+       }
+   });
 });
 
 function isLoggedIn(req, res, next){
