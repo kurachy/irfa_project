@@ -3,21 +3,44 @@
   <div class="row">
     <div class="centershow">
 
+  <h1><%=card.titre%></h1>
 
-      <h1><%=card.titre%></h1>
       <img src="<%=card.image%>">
       <p><%=card.desc%></p>
 
-<form action="/<%=card._id%>?_method=DELETE" method="POST">
-  <button class="btn btn-ls btn-block btn-primary ">Delete</button>
-</form>
 
 
-      <a href="/">Retour</a>
-    </div>
-  </div>
-</div>
+      <form action="/<%=card._id%>?_method=DELETE" method="POST">
+        <button class="btn btn-ls btn-block btn-primary ">Delete</button>
+      </form>
+
+      Suivre ce cours: <input type="checkbox" id="follow"  onclick="isHeFolloing()">
+       <a id="coursAccess" style="display:none" href=""><button   type="button">Accéder au cours </button></a>
+
+<%card.cours.forEach(function(cour){%>
+  <p><%=cour.title%></p>
+<%})%>
+
+<script type="text/javascript">
+
+
+       function isHeFolloing() {
+         var follow = document.getElementById("follow");
+         var coursAccess = document.getElementById("coursAccess");
+         if(follow.checked == true){
+           coursAccess.style.display = "block";
+         }else{
+           coursAccess.style.display = "none";
+         }
+       }
+
+isHeFolloing();
+    </script>
+            <a href="/">Retour</a>
+          </div>
+        </div>
+      </div>
 
 
 
-<% include partials/footer %>
+      <% include partials/footer %>

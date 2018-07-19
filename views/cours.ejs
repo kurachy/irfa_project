@@ -1,0 +1,17 @@
+<% include partials/header %>
+
+<div class="container">
+
+<div class="row">
+<%cour.forEach(function(cours){%>
+
+<h1><%=cours.title%></h1>
+
+<p><%=cours.content%></p>
+
+<%});%>
+
+
+</div>
+
+</div>

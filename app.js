@@ -7,17 +7,19 @@ LocalStrategy = require("passport-local"),
 expressSanitizer = require("express-sanitizer"),
 passportLocalMongoose = require("passport-local-mongoose"),
 Card = require("./models/card.js"),
+Cour = require("./models/cours.js"),
+seedDB = require("./seeds"),
 mongoose = require("mongoose"),
 methodOverride = require("method-override");
 
-
+seedDB();
 mongoose.connect("mongodb://localhost/irfa");
 app.use(express.static("public"));
 app.set("view engine", "ejs");
 
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(require("express-session")({
-  secret: "",
+  secret: "Steel for Men, Silver for Monster and Gold for The Witcher",
   resave: false,
   saveUninitialized: false
 }));
@@ -35,23 +37,12 @@ app.use(function(req, res, next){
 });
 app.use(methodOverride("_method"));
 
-// var cardSchema = new mongoose.Schema({
-//   image: String,
-//   desc : String,
-//   titre : String,
-//   coursLien : String
-// });
-//
-// var Card = mongoose.model("card", cardSchema);
-
-
-
 
 app.post("/", function(req, res){
   var image = req.body.image;
   var desc = req.body.desc;
   var titre = req.body.titre;
-  // var coursLien = req.body.coursLien;
+  // var CourLien = req.body.CourLien;
   var newCard = {image: image, desc: desc, titre: titre}
   Card.create(newCard, function(err, newlyCreated){
     if(err){
@@ -122,14 +113,16 @@ app.get("/", function(req, res){
 });
 
 app.get("/:id",function(req, res){
-  Card.findById(req.params.id, function(err, card){
+  Card.findById(req.params.id).populate("cours").exec(function(err, foundCard){
+
     if(err){
       res.redirect("/");
     }else {
-      res.render("show", {card: card});
+      console.log(foundCard);
+      res.render("show", {card: foundCard});
     }
-  })
 });
+})
 
 app.get("/:id/edit", function(req, res){
   Card.findById(req.params.id, function(err, card){
@@ -140,8 +133,17 @@ app.get("/:id/edit", function(req, res){
     }
   });
 
-})
+});
 
+app.get("/:id/cour", isLoggedIn, function(req, res){
+  Cour.findById(req.params.id, function(err, Cour){
+    if(err){
+      res.redirect("/:id");
+    }else{
+      res.render("cours" ,{cour: Cour});
+    }
+  });
+});
 
 
 // app.put("/:id", function(req, res){
@@ -158,24 +160,24 @@ app.get("/:id/edit", function(req, res){
 app.put("/:id", function(req,res)  {
 
 
-    Card.findByIdAndUpdate(req.params.card_id,{$set:req.body.card}, function(err, card){
-        if(err){
-            console.log(err);
-        }
-        var showUrl = "/" + card._id;
-        res.redirect(showUrl);
-    });
+  Card.findByIdAndUpdate(req.params.card_id,{$set:req.body.card}, function(err, card){
+    if(err){
+      console.log(err);
+    }
+    var showUrl = "/" + card._id;
+    res.redirect(showUrl);
+  });
 });
 
 app.delete("/:id", function(req, res){
-   Card.findById(req.params.id, function(err, card){
-       if(err){
-           console.log(err);
-       } else {
-           card.remove();
-           res.redirect("/");
-       }
-   });
+  Card.findById(req.params.id, function(err, card){
+    if(err){
+      console.log(err);
+    } else {
+      card.remove();
+      res.redirect("/");
+    }
+  });
 });
 
 function isLoggedIn(req, res, next){
@@ -184,6 +186,7 @@ function isLoggedIn(req, res, next){
   }
   res.redirect("/login")
 }
+
 
 app.listen(3000, function(){
   console.log("Server started");
