@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+  <!DOCTYPE html>
 <html>
 <head>
   <meta charset="utf-8">
@@ -16,6 +16,8 @@
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
+
+
     <div class="collapse navbar-collapse" id="navbarText">
       <ul class="navbar-nav mr-auto">
         <li class="nav-item active">
@@ -31,9 +33,15 @@
             </li>
             <%  } %>
           </ul>
+          <div class="topnav">
+
+           <input type="text" placeholder="Search..">
+         </div> 
           <span class="navbar-text">
             <!-- <ul class="nav navbar-nav navbar-right" > -->
+
             <ul>
+
               <%  if(!currentUser){ %>
                 <li><a href="/register"><span class="glyphicon glyphicon-user nav-item login"><i class="fas fa-user-plus"></i></span> Sign Up</a></li>
                 <li><a href="/login"><span class="glyphicon glyphicon-log-in nav-item login"><i class="fas fa-user"></i></span> Login</a></li>
@@ -50,6 +58,6 @@
 
           <div class="backImg">
             <p id="HomeText" >IrfaEst le centre de formation qu'il vous faut<br /> <span id="subHomeText">Profiter de notre nouveau systeme de formation a Badgs</span> </p>
-            <button type="button" class="btn btn-light homeBtn ">inscrivez vous ici !</button>
+            <a href="/register"><button type="button" class="btn btn-light homeBtn ">inscrivez vous ici !</button></a>
           </div>
         </div>

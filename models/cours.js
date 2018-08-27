@@ -1,4 +1,4 @@
-var mongoose = require("mongoose");
+xvar mongoose = require("mongoose");
 
 var courShema = new mongoose.Schema({
   title: String,

@@ -6,13 +6,14 @@ User = require("./models/user.js"),
 LocalStrategy = require("passport-local"),
 expressSanitizer = require("express-sanitizer"),
 passportLocalMongoose = require("passport-local-mongoose"),
+flash = require("connect-flash"),
 Card = require("./models/card.js"),
 Cour = require("./models/cours.js"),
 seedDB = require("./seeds"),
 mongoose = require("mongoose"),
 methodOverride = require("method-override");
 
-seedDB();
+// seedDB();
 mongoose.connect("mongodb://localhost/irfa");
 app.use(express.static("public"));
 app.set("view engine", "ejs");
@@ -30,7 +31,7 @@ app.use(passport.session());
 passport.use(new LocalStrategy(User.authenticate()));
 passport.serializeUser(User.serializeUser());
 passport.deserializeUser(User.deserializeUser());
-
+app.use(flash());
 app.use(function(req, res, next){
   res.locals.currentUser = req.user;
   next();
@@ -38,12 +39,20 @@ app.use(function(req, res, next){
 app.use(methodOverride("_method"));
 
 
+app.use(function(req, res, next){
+  res.locals.currentUser = req.user;
+  res.locals.success = req.flash('success');
+  res.locals.error = req.flash('error');
+  next();
+});
+
 app.post("/", function(req, res){
   var image = req.body.image;
   var desc = req.body.desc;
   var titre = req.body.titre;
+  var content = req.body.content;
   // var CourLien = req.body.CourLien;
-  var newCard = {image: image, desc: desc, titre: titre}
+  var newCard = {image: image, desc: desc, titre: titre, content: content}
   Card.create(newCard, function(err, newlyCreated){
     if(err){
       console.log(err);
@@ -121,7 +130,7 @@ app.get("/:id",function(req, res){
       console.log(foundCard);
       res.render("show", {card: foundCard});
     }
-});
+  });
 })
 
 app.get("/:id/edit", function(req, res){
@@ -135,14 +144,23 @@ app.get("/:id/edit", function(req, res){
 
 });
 
-app.get("/:id/cour", isLoggedIn, function(req, res){
-  Cour.findById(req.params.id, function(err, Cour){
+app.get("/:id/cour", function(req, res){
+
+  Card.findById(req.params.id, function(err, card){
     if(err){
-      res.redirect("/:id");
+      console.log(err);
+      res.redirect("show")
     }else{
-      res.render("cours" ,{cour: Cour});
+      res.render("cours", {card: card});
     }
   });
+  // Cour.findById(req.params.id, function(err, Cour){
+  //   if(err){
+  //     res.redirect("/:id");
+  //   }else{
+  //     res.render("cours",{cour: Cour});
+  //   }
+  // });
 });
 
 

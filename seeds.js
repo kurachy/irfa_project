@@ -15,7 +15,7 @@ var data = [
   },
   {
     image: "https://udemy-images.udemy.com/course/240x135/815816_7c01.jpg",
-    desc: "Van Dyke Brown is a very nice brown, it's almost like a chocolate brown. That's crazy. If you've been in Alaska less than a year you're a Cheechako. We must be quiet, soft and gentle. It's beautiful - and we haven't even done anything to it yet. Trees get lonely too, so we'll give him a little friend. And right there you got an almighty cloud. Let's have a nice tree right here.",
+      desc: "Van Dyke Brown is a very nice brown, it's almost like a chocolate brown. That's crazy. If you've been in Alaska less than a year you're a Cheechako. We must be quiet, soft and gentle. It's beautiful - and we haven't even done anything to it yet. Trees get lonely too, so we'll give him a little friend. And right there you got an almighty cloud. Let's have a nice tree right here.",
     titre : "Android"
   }
 

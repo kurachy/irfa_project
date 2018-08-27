@@ -13,13 +13,13 @@
       <form action="/<%=card._id%>?_method=DELETE" method="POST">
         <button class="btn btn-ls btn-block btn-primary ">Delete</button>
       </form>
+<div class="suivre">
+  Suivre ce cours: <input type="checkbox" id="follow"  onclick="isHeFolloing()">
+   <a id="coursAccess" style="display:none" href="/<%=card._id%>/cour"><button   type="button">Accéder au cours </button></a>
+</div>
 
-      Suivre ce cours: <input type="checkbox" id="follow"  onclick="isHeFolloing()">
-       <a id="coursAccess" style="display:none" href=""><button   type="button">Accéder au cours </button></a>
 
-<%card.cours.forEach(function(cour){%>
-  <p><%=cour.title%></p>
-<%})%>
+
 
 <script type="text/javascript">
 

@@ -1,17 +1,45 @@
 <% include partials/header %>
 
-<div class="container">
 
-<div class="row">
-<%cour.forEach(function(cours){%>
+<div class="centerCour">
+  <div class="sideCours">
 
-<h1><%=cours.title%></h1>
+  <div class="card sb-card">
+  <div class="card-body">
+  <h4>Features:</h4>
+  <ul class="mb-0">
+  <li>
+  <i class="fas fa-balance-scale text-muted"></i>
+  <strong>
+  <a href="https://github.com/BlackrockDigital/startbootstrap-creative/blob/master/LICENSE">MIT License</a>
+  </strong>
+  </li>
+  <li>Built to support the
+  <strong>latest, stable releases</strong>
+  of all major browsers and platforms.</li>
+  <li>Fully responsive HTML template created with Bootstrap 4</li>
+  <li>Custom fixed navigation menu with scrolling animations</li>
+  <li>SASS/SCSS files included for deeper customization options</li>
+  <li>Semantic markup with nav, sections, and asides</li>
+  <li>Custom button styles</li>
+  <li>Subtle on page scroll reveal animations</li>
+  <li>Full page image header banner with vertically centered content</li>
+  <li>Unique, modern design</li>
+  <li>Fully functional portfolio image grid with hover effects and working lightbox gallery</li>
+  </ul>
+  </div>
+  </div>
+</div>
+<!-- <div class="container"> -->
 
-<p><%=cours.content%></p>
 
-<%});%>
+
+<h1 id="courTitre"><%=card.titre%></h1>
+<p id="courText" class="wrap"><%=card.content%></p>
 
 
 </div>
+<!--
+</div> -->
 
-</div>
+<% include partials/footer%>

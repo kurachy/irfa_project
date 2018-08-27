@@ -67,9 +67,17 @@ body{
   margin: auto;
   font-size:42px;
 
+}
 
 
+.suivre{
+  margin-top: 30px;
+}
 
+
+.sideCours{
+float: right;
+max-width: 20px;
 }
 
 ul {
@@ -81,9 +89,29 @@ ul {
   padding: 10px;
 }
 
+.centerCour{
+  padding-top: 40px;
+   min-height: 1000px;
+  /* position: inherit;*/
+
+  text-align: center;
+
+}
+
+#courTitre{
+text-decoration: underline;
+margin-bottom: 60px;
+}
+#courText{
+  line-height: 2em;
+  max-width: 50em;
+  margin: auto;
+    text-align: center;
+}
+
 .centerForm{
   padding-top: 40px;
-  min-height: 800px;
+  min-height: 1000px;
   position: inherit;
   margin: auto;
 }
@@ -93,5 +121,5 @@ ul {
   text-align: center;
   max-width: 500px;
   word-wrap: break-word;
-  min-height: 800px;
+  min-height: 1000px;
 }
